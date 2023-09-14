@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <style>
+        a {
+            text-decoration: none;
+            color: aliceblue;
+        }
+        a:hover {
+            COLOR: black;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="btn btn-secondary">
+            <a th:href="@{/showNewTaskForm}">Add Task</a>
+        </button>
+    </div>
+</nav>
+<div class="container">
+
+
+    <table class="table table-striped">
+    <thead class="table-dark">
+
+    <tr>
+    <h1>To Do List</h1>
+    <th> Task Name </th>
+    <th> Task Description </th>
+    <th> Due Date </th>
+    <th> Completed </th>
+    <th> Actions</th>
+    </tr>
+
+    </thead>
+    <tbody>
+
+    <tr th:each="task : ${TaskList}">
+        <td th:text="${task.taskName}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.dueDate}"></td>
+        <td th:text="${task.completed}"></td>
+        <td>
+            <button class="btn btn-warning">
+                <a th:href="@{/showFormForUpdate/{id}(id=${task.id})}">Update</a>
+            </button>
+            <button class="btn btn-danger">
+                <a th:href="@{/deleteTask/{id}(id=${task.id})}">Delete</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>
